@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 int main(int argc, char *argv[])
 {
     if (argc < 2) {
@@ -11,11 +15,11 @@ int main(int argc, char *argv[])
     
     for (int i = 1; i < argc; i++) {
         int s = remove(argv[i]);
-        if (s < 0) {
-            fprintf(stderr, "ERROR: Failed to remove \"%s\".", argv[i]);
+        if (s < 0 && DEBUG) {
+            fprintf(stderr, "ERROR: Failed to remove \"%s\".\n", argv[i]);
         }
         else {
-            printf("Successfully removed \"%s\".\n", argv[i]);
+            if (DEBUG) printf("Successfully removed \"%s\".\n", argv[i]);
         }
     }
 
